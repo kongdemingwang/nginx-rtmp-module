@@ -256,6 +256,9 @@ typedef struct {
 
     ngx_connection_t       *connection;
 
+    /* statics information */
+    ngx_rtmp_bandwidth_t   push_output_bw;
+
     /* circular buffer of RTMP message pointers */
     ngx_msec_t              timeout;
     uint32_t                out_bytes;

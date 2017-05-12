@@ -537,6 +537,8 @@ ngx_rtmp_send(ngx_event_t *wev)
         s->out_bytes += n;
         s->ping_reset = 1;
         ngx_rtmp_update_bandwidth(&ngx_rtmp_bw_out, n);
+        ngx_rtmp_update_bandwidth(&s->push_output_bw, n);
+
         s->out_bpos += n;
         if (s->out_bpos == s->out_chain->buf->last) {
             s->out_chain = s->out_chain->next;

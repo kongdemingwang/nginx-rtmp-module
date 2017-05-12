@@ -342,6 +342,17 @@ ngx_rtmp_stat_client(ngx_http_request_t *r, ngx_chain_t ***lll,
     NGX_RTMP_STAT_ES(&s->connection->addr_text);
     NGX_RTMP_STAT_L("</address>");
 
+    NGX_RTMP_STAT_L("<send bytes>");
+    NGX_RTMP_STAT(buf, ngx_snprintf(buf, sizeof(buf), "%i",
+                  (ngx_int_t) (s->push_output_bw.bytes)) - buf);
+    NGX_RTMP_STAT_L("</send bytes>");
+
+    NGX_RTMP_STAT_L("<send rate(kbps)>");
+    NGX_RTMP_STAT(buf, ngx_snprintf(buf, sizeof(buf), "%i",
+                  (ngx_int_t) (s->push_output_bw.bandwidth*8/1000)) - buf);
+    NGX_RTMP_STAT_L("</send rate(kbps)>");
+
+
     NGX_RTMP_STAT_L("<time>");
     NGX_RTMP_STAT(buf, ngx_snprintf(buf, sizeof(buf), "%i",
                   (ngx_int_t) (ngx_current_msec - s->epoch)) - buf);
